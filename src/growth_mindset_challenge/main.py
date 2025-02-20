@@ -47,7 +47,10 @@ st.markdown(
 )
 
 st.title("Content Generator")
-API_KEY = os.getenv('GEMINI_API_KEY')
+
+# Get API key from Streamlit secrets
+API_KEY = st.secrets["GEMINI_API_KEY"]
+os.environ["GEMINI_API_KEY"] = API_KEY
 
 class ContentGenrator(Flow):
     @start()
