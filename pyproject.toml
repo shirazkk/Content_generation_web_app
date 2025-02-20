@@ -1,0 +1,22 @@
+[project]
+name = "growth-mindset-challenge"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Shiraz Ali", email = "shirazkk8@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "crewai>=0.102.0",
+    "crewai-tools>=0.36.0",
+    "streamlit>=1.42.1",
+]
+
+[project.scripts]
+growth-mindset-challenge = "growth_mindset_challenge:main"
+content-generator = "growth_mindset_challenge.main:kickoff"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
