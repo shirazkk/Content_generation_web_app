@@ -1,3 +1,7 @@
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 from crewai.flow.flow import Flow, start, listen, router
 from litellm import completion
 import os 
