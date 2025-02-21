@@ -6,6 +6,7 @@ import streamlit as st
 
 # Load environment variables
 dotenv.load_dotenv()
+API_KEY = os.getenv('GEMINI_API_KEY')
 
 # Set page configuration for a wide layout and custom title
 st.set_page_config(page_title="Content Generator", layout="wide")
@@ -48,10 +49,6 @@ st.markdown(
 
 st.title("Content Generator")
 
-# Get API key from Streamlit secrets
-API_KEY = st.secrets["GEMINI_API_KEY"]
-os.environ["GEMINI_API_KEY"] = API_KEY
-
 class ContentGenrator(Flow):
     @start()
     def content_generator(self):
@@ -61,22 +58,22 @@ class ContentGenrator(Flow):
     @router(content_generator)
     def correct_content_tittle(self):
         response = completion(
-            model="gemini/gemini-1.5-flash",
+            model="gemini/gemini-1.5-flash",    
             messages=[
                 {
                     "role": "user",
                     "content": f"""Analyze the following title/phrase: '{self.state['user']}'
 
-Task: Determine if this is a meaningful phrase or title that can be expanded upon.
+                    Task: Determine if this is a meaningful phrase or title that can be expanded upon.
 
-Instructions:
-- If the input is a recognizable word, phrase, or concept that you can explain or elaborate on, respond with 'found'
-- If the input is gibberish, random characters, or completely nonsensical, respond with 'not_found'
-- Respond with ONLY 'found' or 'not_found' - no other text
+                    Instructions:
+                    - If the input is a recognizable word, phrase, or concept that you can explain or elaborate on, respond with 'found'
+                    - If the input is gibberish, random characters, or completely nonsensical, respond with 'not_found'
+                    - Respond with ONLY 'found' or 'not_found' - no other text
 
-Example responses:
-- For 'artificial intelligence' → 'found'
-- For 'asdf123xyz' → 'not_found'"""
+                    Example responses:
+                    - For 'artificial intelligence' → 'found'
+                    - For 'asdf123xyz' → 'not_found'"""
                 }
             ]
         )
@@ -93,7 +90,7 @@ Example responses:
             messages=[
                 {
                     "role": "user",
-                    "content": f"Generate a content for {self.state['user']}"
+                    "content": f"Generate a Blogpost for {self.state['user']}"
                 }
             ]
         )
